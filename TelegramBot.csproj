@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>TelegramBot</RootNamespace>
+    <AssemblyName>TelegramBot</AssemblyName>
+    <!-- The SQLite database file is created next to the executable / working directory. -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Project-wide implicit usings: logging is used by every layer. -->
+    <Using Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Telegram API client (v22.10: TelegramBotClient, ReceiveAsync, IUpdateHandler). -->
+    <PackageReference Include="Telegram.Bot" Version="22.10.3.2" />
+
+    <!-- Database: EF Core 8 + SQLite. Both packages pinned to the same 8.0.x patch. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.31" />
+
+    <!-- Needed by "dotnet ef" (migrations / database update). Design-time only. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.31">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <!-- Generic Host: DI, logging, configuration and graceful shutdown. -->
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+
+    <!-- Loads the .env file into the process environment. -->
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
+  </ItemGroup>
+
+</Project>
